@@ -1,0 +1,21 @@
+pip install scikit-learn-extra
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+from sklearn_extra.cluster import KMedoids
+X=pd.read_csv('kmedoid_data.csv')
+X=X.values
+
+#print(X)
+# Compute Kmedoids clustering
+cobj = KMedoids(n_clusters=2).fit(X[:,1:])
+labels = cobj.labels_
+#print(labels)
+print(cobj.cluster_centers_)
+#print(cobj.cluster_centers_[0,:])
+
+plt.scatter(X[:,1],X[:,2])
+plt.scatter(cobj.cluster_centers_[0,:1],cobj.cluster_centers_[0,1:2],color='r')
+plt.scatter(cobj.cluster_centers_[1,:1],cobj.cluster_centers_[1,1:2],color='r')
+#plt.scatter(cobj.cluster_centers_[2,:1],cobj.cluster_centers_[2,1:2],color='r')
